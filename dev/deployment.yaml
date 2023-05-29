@@ -15,6 +15,10 @@ spec:
       containers:
         - name: springboot-app-db
           image: rajshivaram7/springboot-app-db
+          resources:
+            limits:
+              memory: 1024M
+              cpu: "1"          
           ports:
             - containerPort: 9090
           env:
@@ -33,3 +37,12 @@ spec:
                 secretKeyRef:
                   name: springdemo-postgres-connection
                   key: password
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: kubernetes.io/arch
+                    operator: In
+                    values:
+                      - amd64
