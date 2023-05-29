@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springboot-app-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: springboot-app-db
+  template:
+    metadata:
+      labels:
+        app: springboot-app-db
+    spec:
+      containers:
+        - name: springboot-app-db
+          image: rajshivaram7/springboot-app-db
+          ports:
+            - containerPort: 9090
+          env:
+            - name: SPRING_DATASOURCE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: springdemo-postgres-connection
+                  key: endpoint
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: springdemo-postgres-connection
+                  key: username
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: springdemo-postgres-connection
+                  key: password
