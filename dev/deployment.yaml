@@ -16,9 +16,12 @@ spec:
         - name: springboot-app-db
           image: rajshivaram7/springboot-app-db
           resources:
+            requests:
+              memory: 2048Mi
+              cpu: "100m"
             limits:
-              memory: 1024Mi
-              cpu: "1"
+              memory: 2048Mi
+              cpu: "100m"
           ports:
             - containerPort: 9090
           env:
