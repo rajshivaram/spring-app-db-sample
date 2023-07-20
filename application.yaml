@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: springboot-app-db
+  name: springboot-db-only
   namespace: default
 spec:
   project: default
